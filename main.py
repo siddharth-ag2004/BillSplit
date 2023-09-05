@@ -10,7 +10,7 @@ def main() -> None:
 
     total = sum(L)
     weights = [x / total for x in L]
-    print(f"{total} + {charges} = {total + charges}")
+    print(f"{total} + {other_charges} = {total + other_charges}")
     [
         print(f"Person {i}: {l + other_charges * w}")
         for i, (l, w) in enumerate(zip(L, weights), start=1)
