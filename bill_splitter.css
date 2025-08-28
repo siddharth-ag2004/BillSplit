@@ -1,35 +1,111 @@
-#main_container {
-    padding: 1;
+/*
+    bill_splitter.css
+    A minimal, clean, and responsive theme. (v1.1 - Fixed invalid text-style)
+*/
+
+/* Center the entire application in the middle of the screen */
+Screen {
     align: center middle;
+    layout: vertical;
 }
 
-#people_list {
-    height: auto;
-    max-height: 15;
-    margin-bottom: 1;
-    overflow-y: auto;
+/* The main container for all widgets */
+#main_container {
+    width: 85%;
+    max-width: 80;
+    height: 85%;
+    max-height: 40;
+    border: round white;
+    padding: 1 2;
+    background: $surface;
 }
+
+/* --- WIDGET STYLING --- */
+
+/* Label at the top of the app */
+#main_container > Label {
+    margin-bottom: 1;
+    text-style: bold;
+}
+
+/* 
+    This is the key fix for the scrolling issue.
+    The '1fr' unit tells this container to take up 1 fraction 
+    of the available free space in its parent. It will grow and shrink
+    dynamically, only scrolling when necessary.
+*/
+#people_list {
+    height: 1fr;
+    border: blank;
+    background: $surface-darken-1;
+    padding: 0 1;
+}
+
+/* --- INPUT BOX STYLING --- */
 
 Input {
+    width: 100%;
     margin-bottom: 1;
+    border: round #666; /* A subtle border for unselected inputs */
 }
 
+/* Style for a focused (selected) input box */
+Input:focus {
+    border: round $accent;
+}
+
+/* 
+    This is the fix for the unreadable names.
+    We target the border title directly to ensure it's always readable.
+*/
+Input > .input--border-title {
+    color: $text; /* Bright, readable color for the name */
+    text-style: none; /* <-- THIS IS THE FIX (was 'normal') */
+}
+
+/* Make the name on a focused input even more prominent */
+Input:focus > .input--border-title {
+    color: $accent-lighten-1;
+    text-style: bold;
+}
+
+/* --- BUTTON AND RESULTS STYLING --- */
+
+/* Give the Add Person and Other Charges some space */
+#add_person, #other_charges {
+    margin-top: 1;
+}
+
+/* Make the primary calculate button stand out */
+#calculate {
+    width: 100%;
+    margin-top: 1;
+}
+
+/* The results box at the bottom */
 #results {
     margin-top: 1;
     padding: 1;
-    border: round green;
-    width: 100%;
+    border: round $primary;
     height: auto;
+    min-height: 5; /* Prevents layout jump when empty */
+    overflow: auto;
+    background: $surface-darken-1;
 }
 
-/* --- Updated CSS for the modal dialog --- */
+/* --- MODAL DIALOG (ADD PERSON) STYLING --- */
+
+/* Center the dialog on the screen */
+SelectPersonScreen {
+    align: center middle;
+}
+
 #select_person_dialog {
-    /* Let the dialog size itself vertically */
-    height: auto;
-    max-height: 80%; /* But not more than 80% of the screen height */
     width: 60;
+    height: 70%; /* Use a percentage of the screen height */
+    max-height: 20;
     border: thick $primary;
-    background: $surface;
+    background: $boost;
     padding: 1;
 }
 
@@ -37,15 +113,14 @@ Input {
     margin-bottom: 1;
 }
 
-/* This is the key change */
+/* Make the list of names fill the available space in the dialog */
 #select_person_dialog > SelectionList {
-    /* Make the list take up 1 fraction of the remaining space */
     height: 1fr;
+    border: round $primary-darken-1;
     margin-bottom: 1;
 }
 
 #dialog_buttons {
-    /* Align buttons to the right and ensure they fit */
     width: 100%;
     height: auto;
     align-horizontal: right;
