@@ -22,7 +22,7 @@ class SelectPersonScreen(ModalScreen[list[str]]):
             yield SelectionList[str](
                 *[Selection(person, person, id=person) for person in self.people]
             )
-            with Horizontal(id="dialog_buttons"):
+            with Vertical(id="dialog_buttons"):
                 yield Button("Add Selected", variant="primary", id="add")
                 yield Button("Cancel", id="cancel")
 
