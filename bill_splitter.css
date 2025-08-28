@@ -20,7 +20,9 @@ Screen {
 }
 
 #people_list {
-    height: 1fr;
+    /* height: 1fr; */
+    min-height: 60%;
+    max-height: 60%;
     border: blank;
     background: $surface-darken-1;
     padding: 0 1;
@@ -31,9 +33,9 @@ Screen {
 PersonInput {
     layout: horizontal;
     height: 3; /* Default height for a widget with a border */
-    margin-bottom: 1;
+    /* margin-bottom: 1; */
     border: round #666;
-    padding: 0 1;
+    padding: 0 0;
     align: center middle;
 }
 

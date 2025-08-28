@@ -84,7 +84,7 @@ class BillSplitterApp(App):
 
     def compose(self) -> ComposeResult:
         yield Header()
-        yield Vertical(
+        yield VerticalScroll(
             Label("Enter amounts for each person:"),
             VerticalScroll(id="people_list"),
             Button("Add Person", id="add_person"),
