@@ -91,7 +91,7 @@ class BillSplitterApp(App):
         yield VerticalScroll(
             Label("Enter amounts for each person:"),
             VerticalScroll(id="people_list"),
-            Button("Add Person", id="add_person"),
+            Button("Add Person", id="add_person", variant='primary'),
             Input(placeholder="Other charges (e.g., 15/2)", id="other_charges"),
             # Wrap Calculate and Share buttons in a Horizontal container
             # Added a class "action-buttons-row" for more specific CSS targeting
