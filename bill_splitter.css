@@ -1,0 +1,57 @@
+#main_container {
+    padding: 1;
+    align: center middle;
+}
+
+#people_list {
+    height: auto;
+    max-height: 15;
+    margin-bottom: 1;
+    overflow-y: auto;
+}
+
+Input {
+    margin-bottom: 1;
+}
+
+#results {
+    margin-top: 1;
+    padding: 1;
+    border: round green;
+    width: 100%;
+    height: auto;
+}
+
+/* --- Updated CSS for the modal dialog --- */
+#select_person_dialog {
+    /* Let the dialog size itself vertically */
+    height: auto;
+    max-height: 80%; /* But not more than 80% of the screen height */
+    width: 60;
+    border: thick $primary;
+    background: $surface;
+    padding: 1;
+}
+
+#select_person_dialog > Label {
+    margin-bottom: 1;
+}
+
+/* This is the key change */
+#select_person_dialog > SelectionList {
+    /* Make the list take up 1 fraction of the remaining space */
+    height: 1fr;
+    margin-bottom: 1;
+}
+
+#dialog_buttons {
+    /* Align buttons to the right and ensure they fit */
+    width: 100%;
+    height: auto;
+    align-horizontal: right;
+    padding-top: 1;
+}
+
+#dialog_buttons > Button {
+    margin-left: 1;
+}
