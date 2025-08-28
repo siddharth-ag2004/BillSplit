@@ -2,6 +2,7 @@
 
 import json
 from decimal import Decimal, InvalidOperation
+import subprocess # Import subprocess for running external commands
 
 from textual.app import App, ComposeResult
 from textual.containers import Vertical, VerticalScroll, Horizontal
@@ -92,7 +93,13 @@ class BillSplitterApp(App):
             VerticalScroll(id="people_list"),
             Button("Add Person", id="add_person"),
             Input(placeholder="Other charges (e.g., 15/2)", id="other_charges"),
-            Button("Calculate", variant="primary", id="calculate"),
+            # Wrap Calculate and Share buttons in a Horizontal container
+            # Added a class "action-buttons-row" for more specific CSS targeting
+            Horizontal(
+                Button("Calculate", variant="primary", id="calculate", classes="action-button"),
+                Button("Share", variant="success", id="share", classes="action-button"),
+                classes="action-buttons-row" # Use a class for this Horizontal container
+            ),
             Static(id="results"),
             id="main_container",
         )
@@ -123,6 +130,8 @@ class BillSplitterApp(App):
             self.calculate_split()
         elif event.button.id == "add_person":
             self.action_add_person()
+        elif event.button.id == "share": # Handle the new share button
+            self.action_share_results()
 
     def action_add_person(self) -> None:
         current_people = {inp.border_title for inp in self.query(PersonInput)}
@@ -193,6 +202,30 @@ class BillSplitterApp(App):
             results_widget.update(
                 "[bold red]Error: Invalid number or expression.[/bold red]"
             )
+
+    def action_share_results(self) -> None:
+        """Shares the content of the results widget using termux-share."""
+        results_widget = self.query_one("#results", Static)
+        share_text = results_widget.renderable
+        if share_text:
+            try:
+                # Convert Textual Renderable to plain text for sharing
+                plain_text = str(share_text).replace("[bold]", "").replace("[/bold]", "")
+
+                # Use subprocess to run the termux-share command
+                subprocess.run(["termux-share", "-a", "send"], input=plain_text.encode(), check=True)
+                self.notify("Results shared successfully!")
+            except FileNotFoundError:
+                self.notify(
+                    "Error: 'termux-share' command not found. Are you in Termux?",
+                    severity="error",
+                )
+            except subprocess.CalledProcessError as e:
+                self.notify(f"Error sharing: {e}", severity="error")
+            except Exception as e:
+                self.notify(f"An unexpected error occurred: {e}", severity="error")
+        else:
+            self.notify("Nothing to share yet. Calculate the bill first!", severity="warning")
 
     def action_toggle_dark(self) -> None:
         self.dark = not self.dark

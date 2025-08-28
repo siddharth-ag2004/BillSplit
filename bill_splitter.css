@@ -21,7 +21,7 @@ Screen {
 
 #people_list {
     /* height: 1fr; */
-    min-height: 60%;
+    min-height: 60%; /* Keep this for flexibility */
     max-height: 60%;
     border: blank;
     background: $surface-darken-1;
@@ -87,9 +87,21 @@ PersonInput > Horizontal > Input {
     border: round $accent;
 }
 
-#calculate {
+/* Container for Calculate and Share buttons */
+/* Changed from #action_buttons_container to .action-buttons-row */
+.action-buttons-row {
+    layout: horizontal; /* Explicitly set layout for clarity */
     width: 100%;
+    height: 3; /* Give it a fixed height to ensure it's visible */
     margin-top: 1;
+    align: center middle; /* Center buttons vertically and horizontally within the row */
+}
+
+/* Common style for action buttons (Calculate and Share) */
+.action-button {
+    width: 1fr; /* Each button takes equal space */
+    height: 100%; /* Make buttons fill the height of their parent row */
+    min-height: 1; /* Ensure a minimum height */
 }
 
 #results {
