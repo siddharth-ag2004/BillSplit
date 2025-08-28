@@ -116,10 +116,10 @@ SelectPersonScreen {
 #select_person_dialog {
     /* width: 60; */
     /* height: 90%; */
-    max-height: 80%;
+    max-height: 90%;
     border: thick $primary;
     background: $boost;
-    padding: 1;
+    padding: 0;
 }
 
 #select_person_dialog > Label {
@@ -128,8 +128,9 @@ SelectPersonScreen {
 
 #select_person_dialog > SelectionList {
     height: 1fr;
+    min-height: 50%;
     border: round $primary-darken-1;
-    margin-bottom: 1;
+    background: $surface-darken-1;
 }
 #dialog_buttons {
     width: 100%;
