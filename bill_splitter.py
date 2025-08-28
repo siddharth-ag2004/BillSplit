@@ -109,6 +109,7 @@ class BillSplitterApp(App):
         try:
             return Decimal(eval(expression, {"__builtins__": None}, {}))
         except Exception:
+            self.notify("⚠️ Invalid expression, using 0 instead.", severity="error")
             return Decimal(0)
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
