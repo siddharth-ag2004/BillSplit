@@ -50,7 +50,7 @@ class BillSplitterApp(App):
         """Create child widgets for the app."""
         yield Header()
         yield Vertical(
-            Label("Enter amounts or expressions (e.g., 50+20*0.75) for each person:"),
+            # Label("Enter amounts or expressions for each person:"),
             VerticalScroll(id="people_list"),
             Button("Add Person", id="add_person"),
             Input(placeholder="Other charges (e.g., 15/2)", id="other_charges"),
